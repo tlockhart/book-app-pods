@@ -1,0 +1,12 @@
+{{!-- Access the sortBooks method passed in from controller, NOTE: if helper is in quotes --}}
+<div class="table-cell header {{if this.isSelected 'selected'}}" {{action @sortBooks @sortBy}}>
+    {{!-- reference property being passed into component as a prop with @ --}}
+    {{@columnName}} 
+    {{#if isSelected}}
+    {{#if @isReversed}}
+    &uarr; 
+    {{else}}
+    &darr;
+    {{/if}}
+    {{/if}}
+    </div>

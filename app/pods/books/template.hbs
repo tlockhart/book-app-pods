@@ -1,0 +1,45 @@
+<h1>Book Collection</h1>
+<div class="bulk-actions">
+    <button {{action this.hideBooks}} disabled={{this.noBooksSelected}}>Hide</button>
+    <button {{action this.showBooks}}disabled={{this.noBooksSelected}}>Show</button>
+    <button {{action this.selectAll}}disabled={{this.allBooksSelected}}>Select All</button>
+    <button {{action this.unselectAll}}disabled={{this.noBooksSelected}}>Unselect All</button>
+</div>
+<div class="table table--5cols">
+    <div class="table-row">
+        {{!-- Pass in sortBooks method into component directly from the controller--}}
+        {{#each this.headerInfo as |header|}}
+        <SortableHeader 
+        @columnName={{header.name}} 
+        @sortBooks={{action this.sortBooks}} 
+        @sortBy={{header.sortBy}}
+            @sortedBy={{this.sortProperty}} @isReversed={{this.isReversed}} role="button" />
+        {{/each}}
+        <div class="table-cell header">Actions</div>
+    </div>
+
+    {{!-- {{#each this.sortedBooks as |book index|}} --}}
+    {{#each this.shownBooks as |book index|}}
+    <BookTableRow 
+        @book={{book}} 
+        @toggleBookSelection={{this.toggleBookSelection}} 
+        @selectedBookIds={{this.selectedBookIds}} 
+        @index={{index}}
+        @toggleAction={{this.hideBook}} 
+        @toggleText='Hide' />
+    {{/each}}
+</div>
+
+<h1> Hidden Books</h1>
+<div class="table table--5cols">
+    {{#each this.hiddenBooks as |book index|}}
+    <BookTableRow 
+        @book={{book}} 
+        @toggleBookSelection={{this.toggleBookSelection}} 
+        @selectedBookIds={{this.selectedBookIds}} 
+        @index={{index}} 
+        @toggleAction={{this.showBook}}
+        @toggleText='Show'/>
+    {{/each}}
+</div>
+{{outlet}}
