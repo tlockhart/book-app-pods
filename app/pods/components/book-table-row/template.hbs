@@ -6,6 +6,10 @@
     <div class="table-cell">{{@book.publicationYear}}</div>
     <div class="table-cell">{{@book.pages}}</div>
     <div class="table-cell">
+        {{#if @toggleAction}}
         <button {{action @toggleAction @book}}>{{@toggleText}}</button>
+        {{/if}}
+        {{!-- link-to label routename parameter --}}
+        {{link-to 'Visit' 'books.book' @book.id tagName="button"}}
     </div>
 </div>
